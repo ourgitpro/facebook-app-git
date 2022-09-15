@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import {useState} from 'react';
 import LoginInput from '../../components/inputs/logininput/LoginInput';
 const loginInfos={
-  email : 'kkkkk',
+  email : '',
   password: '',
 }
 const Login = () => {
