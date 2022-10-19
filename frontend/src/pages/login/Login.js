@@ -1,68 +1,85 @@
 import React from 'react'
 import "./Login.css"
-import { Formik, Form } from "formik";
+import {Button,Container,Grid,TextField} from '@mui/material';
+import { styled } from '@mui/material/styles';
+//import { Formik, Form } from "formik";
 import { Link } from "react-router-dom";
-import {useState} from 'react';
-import LoginInput from '../../components/inputs/logininput/LoginInput';
-const loginInfos={
+//import {useState} from 'react';
+//import LoginInput from '../../components/inputs/logininput/LoginInput';
+/*const loginInfos={
   email : '',
   password: '',
-}
+}*/
 const Login = () => {
-  const [login,setLogin]=useState(loginInfos);
-  const {email,password} = login;
-  console.log(login)
-  //setLogin('welcome')
-  //console.log(login)
-  let handleLoginChange= (e)=>{
-    const {name,value} =e.target;
-    setLogin({ ...login,[name]:value})
 
-  }
+  const CssTextField = styled(TextField)({
+    width: "100%",
+    marginBottom: 15,
+    
+  });
+  const LoginButton = styled(Button)({
+    backgroundColor:"#166FE5",
+    color:"#fff",
+    width:"100%",
+    padding:"15px 0",
+    fontFamily: ["'Poppins', sans-serif;"],
+    fontSize:20,
+    fontWeight:700,
+    "&:hover":
+    {
+      backgroundColor:"#166FE5",
+    },
+  })
+  const RegistrationButton = styled(Button)({
+    backgroundColor:"#36A420",
+    color:"#fff",
+    
+    padding:"15px 32px",
+    fontFamily: ["'Poppins', sans-serif;"],
+    fontSize:20,
+    fontWeight:700,
+    "&:hover":
+    {
+      backgroundColor:"#36A420",
+    },
+    [ "@media (min-width:375px) and (max-width:599px)"]:{
+      padding:"15px 22px",
+    },
+  })
+ 
   return (
-    <div className="login">
-    <div className="login_wrapper">
-      <div className="login_wrap">
-        <div className="login_1">
-          <img src="../../icons/facebook.svg" alt="" />
-          <span>
-            Facebook helps you connect and share with the people in your life.
-          </span>
-        </div>
-        <div className="login_2">
-          <div className="login_2_wrap">
-            <Formik
-            enableReinitialize
-            initialValues={{
-              email,
-              password,
-            }}
-            >
-              {(formik) => (
-                <Form>
-                  <LoginInput placeholder="Email Adress or Phone Number" type="text" name="email" onChange={handleLoginChange} />
-                  <LoginInput placeholder="Password" type="password" name="password" onChange={handleLoginChange}/>
-                  <button type="submit" className="blue_btn">
-                    Log In
-                  </button>
-                </Form>
-              )}
-            </Formik>
-            <Link to="/forgot" className="forgot_password">
-              Forgotten password ?
-            </Link>
-            <div className="sign_splitter"></div>
-            <button className="blue_btn open_signup">Create Account</button>
-          </div>
-          <Link to="/" className="sign_extra">
-            <b>Create a Page</b>
-            for a celebrity, brand or business.
-          </Link>
-        </div>
-      </div>
-      <div className="register"></div>
+   
+  <>
+  <Container fixed className="login">
+  <Grid container spacing={2}>
+  <Grid item sm={5} lg={5}>
+    <div className="imgbox">
+    <img src="icons/facebook.svg" alt="facebook" />
+    <p>Facebook helps you connect and share with the people in your life.</p>
     </div>
-  </div>
+  </Grid>
+  <Grid item sm={7} lg={7} >
+     <div className="box">
+     <CssTextField id="outlined-basic" label="Email Adress" variant="outlined" />
+     <CssTextField id="outlined-basic" label="password" variant="outlined" type="password" />
+     <LoginButton>Log in</LoginButton>
+     <Link to="/" className="forgot">Forgot Password?</Link>
+     <div className="line"></div>
+     <div className="ragButton">
+     <RegistrationButton>Create New Account</RegistrationButton>
+     </div>
+     </div>
+   
+  </Grid>
+  
+  
+</Grid>
+  
+</Container>
+
+   
+    
+  </>
   )
 }
 
