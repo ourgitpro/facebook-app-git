@@ -1,17 +1,41 @@
 import React from 'react'
 import "./Login.css"
-import {Button,Container,Grid,TextField} from '@mui/material';
+import {Button,Container,Grid,TextField,Alert} from '@mui/material';
 import { styled } from '@mui/material/styles';
 //import { Formik, Form } from "formik";
 import { Link } from "react-router-dom";
-//import {useState} from 'react';
+import {useState} from 'react';
 //import LoginInput from '../../components/inputs/logininput/LoginInput';
 /*const loginInfos={
   email : '',
   password: '',
+  id="outlined-basic"
 }*/
 const Login = () => {
+ let [email,setEmail] =useState('')
+ let [emailerr,setEmailerr] =useState('')
+ let [password,setPassword] =useState('')
+ let [passworderr,setPassworderr] =useState('')
 
+
+
+ let handleEmail=(e)=>{
+  setEmail(e.target.value)
+  setEmailerr("")
+  
+ }
+ let handlePassword=(e)=>{
+  setPassword(e.target.value)
+  setPassworderr('')
+ }
+ let handleSubmit=(e)=>{
+  if(!email){
+    setEmailerr("helow")
+  }
+  if(!password){
+    setPassworderr('password not fill in the box')
+  }
+ }
   const CssTextField = styled(TextField)({
     width: "100%",
     marginBottom: 15,
@@ -60,9 +84,17 @@ const Login = () => {
   </Grid>
   <Grid item sm={7} lg={7} >
      <div className="box">
-     <CssTextField id="outlined-basic" label="Email Adress" variant="outlined" />
-     <CssTextField id="outlined-basic" label="password" variant="outlined" type="password" />
-     <LoginButton>Log in</LoginButton>
+     <CssTextField   id="outlined-basic" label="Email Adress" variant="outlined" onChange={handleEmail} />
+   {emailerr && <Alert style={{marginButtom:"10px"}} variant="filled" severity="error">
+   {emailerr}
+ </Alert>}
+    
+     <CssTextField id="outlined-basic" label="password"  type="password" onChange={handlePassword} />
+     {passworderr &&  <Alert style={{marginButtom:"10px"}} variant="filled" severity="error">
+     {passworderr}
+   </Alert>}
+    
+     <LoginButton onClick={handleSubmit}>Log in</LoginButton>
      <Link to="/" className="forgot">Forgot Password?</Link>
      <div className="line"></div>
      <div className="ragButton">
